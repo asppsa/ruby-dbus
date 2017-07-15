@@ -545,7 +545,7 @@ module DBus
         end
       when DBus::Message::SIGNAL
         # the signal can match multiple different rules
-        @signal_matchrules.each do |mrs, slot|
+        @signal_matchrules.dup.each do |mrs, slot|
           if DBus::MatchRule.new.from_s(mrs).match(m)
             slot.call(m)
           end
